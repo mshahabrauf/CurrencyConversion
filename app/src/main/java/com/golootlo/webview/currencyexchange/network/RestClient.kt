@@ -32,7 +32,7 @@ object RestClient {
         logging!!.level = if ( BuildConfig.DEBUG ) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
     }
 
-    fun getRestAdapter(activity: Activity, userId: String?): WebServices {
+    fun getRestAdapter(): WebServices {
         val httpClient : OkHttpClient
             httpClient = OkHttpClient.Builder()
                     .connectTimeout(TIMEOUT.toLong(), TimeUnit.SECONDS).writeTimeout(
