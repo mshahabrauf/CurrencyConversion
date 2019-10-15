@@ -15,6 +15,6 @@ interface WebServices {
     @GET(NetworkConstants.API+ ApiEndPoints.LIVE)
     fun getCurrencyRate(@Query("access_key") accessKey : String = NetworkConstants.ACCESS_KEY.reversed(),
                                @Query("source") source : String? = null,
-                               @Query("currencies") currencies : String,
+                               @Query(value = "currencies", encoded = true) currencies : String,
                                @Query("format") format : Int = 1): Call<Currency>
 }

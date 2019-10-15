@@ -9,5 +9,5 @@ import android.widget.Toast
  * @param message
  */
 fun Activity.showMessage(message: String) {
-    Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,message, Toast.LENGTH_LONG).show();
 }
