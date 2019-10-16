@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.golootlo.webview.currencyexchange.R
 import com.golootlo.webview.currencyexchange.callbacks.EditableTextWatcher
 import com.golootlo.webview.currencyexchange.callbacks.ItemSelectedListener
@@ -21,13 +22,14 @@ import com.golootlo.webview.currencyexchange.network.RestClient
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
-
-
+import com.golootlo.webview.currencyexchange.models.ExchangeRate
+import java.util.stream.Collectors
 
 
 class MainActivity : AppCompatActivity() {
 
 
+    private lateinit var adapter: ExchangeRateAdapter
     private var et2Focus: Boolean = false
     private var et1Focus: Boolean = false
     private var forward: Boolean = true
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                             currencyResponse = this
                             setDate(currencyResponse.timestamp)
                             makeCurrencyExchangeRate()
+                            loadExchangeRates(this)
                         } else {
                             spinner.setSelection(0)
                             showMessage(response.body()?.error?.info.toString())
@@ -67,6 +70,14 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
+    private fun loadExchangeRates(currency: Currency) {
+        val list : ArrayList<ExchangeRate> = ArrayList()
+        currency.quotes?.forEach {
+            list.add(ExchangeRate(it.key, it.value))
+        }
+        adapter.swapData(list)
+    }
+
     private fun setDate(timestamp: Long?) {
         date.setText("Exchange rates were collected at " + timestamp?.makeTimeString())
     }
@@ -75,7 +86,14 @@ class MainActivity : AppCompatActivity() {
         currencyResponse = Currency()
         initSpinner(spinner)
         initSpinner(spinner2)
+        initExchangeRateRecycleView()
         setListeners()
+    }
+
+    private fun initExchangeRateRecycleView() {
+        exchangeRateList.layoutManager = LinearLayoutManager(this)
+        adapter = ExchangeRateAdapter(this, ArrayList())
+        exchangeRateList.adapter = adapter
     }
 
     private fun setListeners() {
