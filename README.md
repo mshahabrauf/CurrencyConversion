@@ -6,7 +6,7 @@
 
 - [x] Create a Project for a Mobile Phone
 - [x] Android: _Kotlin_ | iOS: _Swift_ (sorry, no Objective-C or Java please! You can learn Kotlin/Swift easily I'm sure:))
-      (Android: Kotlin)
+     #### (Android: Kotlin)
 ### Functional Requirements:
 - [x] Exchange rates must be fetched from: https://currencylayer.com/documentation  
 - [x] Use free API Access Key for using the API
@@ -14,7 +14,7 @@
 - [x] User must be able to enter desired amount for selected currency
 - [x] User should then see a list of exchange rates for the selected currency
 - [x] Rates should be persisted locally and refreshed no more frequently than every 30 minutes (to limit bandwidth usage)
-      ( Currently USD to five currencies exchange rates available, Switching source currency isn't allowed in free API access.)
+     #### ( Currently USD to five currencies exchange rates available, Switching source currency isn't allowed in free API access.)
 
 ### UI Suggestion:
 - [X] Some way to select a currency
